@@ -11,7 +11,7 @@ exports.create = function (req, res){
 	var login = req.body.login;
 	var password = req.body.password;
 
-	var userController = require ('./user_controller');
+	var userController = require ('./user_controller.js');
 	userController.autenticar(login, password, function(error, user){
 		if(error){ //si hay error retornamos mensajes de erorr de sesi√n
 			req.session.errors = [{"message": 'Se ha producido un error: '+error}];
@@ -29,6 +29,6 @@ exports.create = function (req, res){
 
 //DELETE /logout -- Destruir sesi√n
 exports.destroy = function (req, res){
-	delete req.sesion.user;
+	delete req.session.user;
 	res.redirect(req.session.redir.toString()); // redirect a path anterior a login
 }
