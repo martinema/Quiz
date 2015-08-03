@@ -9,7 +9,8 @@
 		Humanidades</option>
 	<option value="ocio" <%= (quiz.tema === 'ocio')?' selected ' : '' %>>Ocio</option>
 	<option value="ciencia" <%= (quiz.tema === 'ciencia')?' selected ' : '' %>>Ciencia</option>
-	<option value="tecnologia" <%= (quiz.tema === 'tecnologia')?' selected ' : '' %>>Tecnolog&iacute;a</option>
+	<option value="tecnologia" <%= (quiz.tema === 'tecnologia')?:' selected ' : ''%>>
+		Tecnolog&iacute;a</option>
 </select><br/>
 
 <a href="/quizes"><button type="button">Cancelar</button></a>
