@@ -1,4 +1,9 @@
 <h2>Login</h2>
+
+<% if (session.autoLogout == true && session.startTime!="undefined"){ %>
+	<p>El usuario ha sido desconectado por inactividad superior a 2 minutos.</p>
+<% } %>
+
 <form method="POST" action="/login">
 	<div class="field">
 		<label for="login">Login:</label><br/>

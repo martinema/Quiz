@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var _MAXTIME = 2 * 60 * 1000; //Tiempo auto-logout
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -39,6 +40,20 @@ app.use(function(req, res, next){
 
 	//Hacer visible req.session en las vistas
 	res.locals.session = req.session;
+
+
+	//Control de auto-logout
+	if(req.session.startTime ){
+		var ahora = new Date().getTime();
+		var difUltVez = ahora - req.session.startTime;
+		if(difUltVez > _MAXTIME){
+			delete req.session.startTime;
+			req.session.autoLogout = true;
+			res.redirect("/logout");
+		}else{
+			req.session.startTime = ahora;
+		}
+	}
 	next();
 });
 
